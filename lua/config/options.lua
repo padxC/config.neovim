@@ -5,8 +5,9 @@ local opt = vim.opt
 opt.number = true -- enable line numbers
 opt.relativenumber = true -- relative line numbers
 opt.scrolloff = 8
+opt.sidescrolloff = 8
 opt.signcolumn = "yes"
---opt.colorcolumn = "80"
+opt.colorcolumn = "80"
 opt.guicursor = "n-v-i-c:block-Cursor"
 
 -- tabs & indentation
@@ -26,7 +27,7 @@ opt.incsearch = true
 
 -- behaviour
 --opt.hidden = true
---opt.errorbells = false
+opt.errorbells = false
 opt.swapfile = false
 opt.backup = false
 opt.undofile = true

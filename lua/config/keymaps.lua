@@ -10,7 +10,6 @@ local keymap = vim.keymap
 --keymap.set("n", "<leader>p", ":bp<cr>")
 --keymap.set("n", "<leader>x", ":bd<cr>")
 
-
 -- tabs
 keymap.set("n", "<left>", "gT")
 keymap.set("n", "<right>", "gt")
@@ -39,10 +38,10 @@ keymap.set("v", "<", "<gv", { desc = "Stay in visual mode during outdent" })
 keymap.set("v", ">", ">gv", { desc = "Stay in visual mode during indent" })
 
 -- Easily hit escape in terminal mode.
---vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>")
+vim.keymap.set("t", "<leader>te", "<c-\\><c-n>") -- terminal exit
 
 -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set("n", "<leader>st", function()
+vim.keymap.set("n", "<leader>st", function() -- start terminal
   vim.cmd.new()
   vim.cmd.wincmd "J"
   vim.api.nvim_win_set_height(0, 12)

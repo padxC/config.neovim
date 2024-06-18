@@ -20,6 +20,6 @@ spec("plugins.tree-sitter")
 spec("plugins.lsp")
 
 --obsidian note-taking
-spec("plugins.obsidian")
+--spec("plugins.obsidian")
 
 require("config.nvim-lazy")

@@ -13,6 +13,7 @@ function M.config()
       "markdown_inline", 
       "bash", 
       "python",
+      "vimdoc",
     },
     highlight = { enable = true },
     indent = { enable = true },
