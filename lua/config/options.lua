@@ -22,7 +22,6 @@ opt.wrap = false -- let the line go, stop initializing new line when get out of 
 -- search & settings
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- include mixed case
---opt.hlsearch = false -- hightlight
 opt.incsearch = true
 
 -- behaviour
@@ -31,7 +30,7 @@ opt.errorbells = false
 opt.swapfile = false
 opt.backup = false
 opt.undofile = true
-opt.mouse:append("a")
+opt.mouse = "a"
 
 ---
 opt.inccommand = "split"

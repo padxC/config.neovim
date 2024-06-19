@@ -5,11 +5,6 @@ vim.g.maplocalleader = " "
 ---===---
 local keymap = vim.keymap
 
--- buffers
---keymap.set("n", "<leader>n", ":bn<cr>")
---keymap.set("n", "<leader>p", ":bp<cr>")
---keymap.set("n", "<leader>x", ":bd<cr>")
-
 -- tabs
 keymap.set("n", "<left>", "gT")
 keymap.set("n", "<right>", "gt")
@@ -24,11 +19,24 @@ keymap.set("n", "<c-k>", "<c-w><c-k>")
 keymap.set("n", "<c-l>", "<c-w><c-l>")
 keymap.set("n", "<c-h>", "<c-w><c-h>")
 
+-- control size 
+keymap.set("n", "<M-.>", "<c-w>5<")
+keymap.set("n", "<M-,>", "<c-w>5>")
+keymap.set("n", "<M-t>", "<C-W>+")
+keymap.set("n", "<M-s>", "<C-W>-")
+
+-- move a blocks of text up/down with K/J in visual mode
+keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
+keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
+
 -- center cursor
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "n", "nzz") -- center next-searching 
 keymap.set("n", "N", "nzz")
+
+-- turn off hightlight
+keymap.set("n", "<leader>no", "<cmd>nohlsearch<cr>")
 
 -- paste our contents without replace what’s in the register
 keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without updating register" })
@@ -48,46 +56,6 @@ vim.keymap.set("n", "<leader>st", function() -- start terminal
   vim.wo.winfixheight = true
   vim.cmd.term()
 end)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

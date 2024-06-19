@@ -6,6 +6,9 @@ local M = {
 
 function M.config()
     require("oil").setup {
+        default_file_explorerer = true,
+        delete_to_trash = true,
+        skip_confirm_for_simple_edits = true,
         columns = { "icon" },
         keymaps = {
             ["<C-h>"] = false,
@@ -20,7 +23,7 @@ function M.config()
     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
     -- Open parent directory in floating window
-    vim.keymap.set("n", "<space>-", require("oil").toggle_float)
+    vim.keymap.set("n", "<space>e", require("oil").toggle_float)
 end
 
 return M

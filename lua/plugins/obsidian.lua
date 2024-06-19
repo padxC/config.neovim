@@ -16,8 +16,8 @@ function M.config()
   require("obsidian").setup({
     workspaces = {
       {
-        name = "2nd_Dimension",
-        path = "/home/chukk/2nd_Dimension",
+        name = "2nd-Dimension",
+        path = "/mnt/c/2nd-Dimension",
       },
     },
     notes_subdir = "1- Main Notes",

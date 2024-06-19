@@ -17,9 +17,9 @@ spec("plugins.oil")
 spec("plugins.completion")
 spec("plugins.mason")
 spec("plugins.tree-sitter")
-spec("plugins.lsp")
+--spec("plugins.lsp")
 
 --obsidian note-taking
---spec("plugins.obsidian")
+spec("plugins.obsidian")
 
 require("config.nvim-lazy")

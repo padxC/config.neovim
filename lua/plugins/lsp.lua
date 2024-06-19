@@ -5,7 +5,8 @@ local M = {
   dependencies = {
     {
       "folke/neodev.nvim",
-    },
+
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
   },
 }
 
@@ -54,7 +55,6 @@ function M.config()
   vim.api.nvim_set_keymap("v", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 
   local lspconfig = require "lspconfig"
-  local icons = require "plugins.icons"
 
   local servers = {
     "lua_ls",
@@ -72,10 +72,10 @@ function M.config()
     signs = {
       active = true,
       values = {
-        { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-        { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-        { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+        { name = "DiagnosticSignError", text = diagnostics.Error },
+        { name = "DiagnosticSignWarn", text = diagnostics.Warning },
+        { name = "DiagnosticSignHint", text = diagnostics.Hint },
+        { name = "DiagnosticSignInfo", text = diagnostics.Information },
       },
     },
     virtual_text = false,

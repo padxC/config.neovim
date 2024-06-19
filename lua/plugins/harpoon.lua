@@ -21,10 +21,4 @@ function M.config()
   end
 end
 
--- notification 
-function M.mark_file()
-  require("harpoon.mark").add_file()
-  vim.notify "󱡅  marked file"
-end
-
 return M
