@@ -8,13 +8,8 @@ local M = {
 function M.config()
   require("nvim-treesitter.configs").setup {
     ensure_installed = { 
-      "lua", 
-      "markdown", 
-      "markdown_inline", 
-      "bash", 
-      "python",
-      "vimdoc",
-      "cpp",
+      "lua", "markdown", "markdown_inline", "bash", "python",
+      "vim", "vimdoc", "query", "cpp", "c",
     },
     highlight = { 
       enable = true,
@@ -23,12 +18,12 @@ function M.config()
     indent = { 
       enable = true,
     },
-    autotag = {
-      enable = true,
-    },
-    autopairs = {
-      enable = true;
-    },
+    --autotag = {
+      --enable = true,
+    --},
+    --autopairs = {
+      --enable = true;
+    --},
   }
 end
 

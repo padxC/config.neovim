@@ -12,10 +12,16 @@ function M.config()
         columns = { "icon" },
         keymaps = {
             ["<C-h>"] = false,
-            --["<M-h>"] = "actions.select_split",
+            ["<C-Space>"] = "actions.preview",
+            ["g?"] = "actions.show_help",
+            ["g."] = "actions.toggle_hidden",
         },
         view_options = {
             show_hidden = true,
+        },
+        float = {
+          max_height = 35,
+          max_width = 130,
         },
     }
 

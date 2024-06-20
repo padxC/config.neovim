@@ -7,8 +7,9 @@ opt.relativenumber = true -- relative line numbers
 opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.signcolumn = "yes"
-opt.colorcolumn = "80"
+--opt.colorcolumn = "80"
 opt.guicursor = "n-v-i-c:block-Cursor"
+--opt.cursorline = true
 
 -- tabs & indentation
 opt.tabstop = 2

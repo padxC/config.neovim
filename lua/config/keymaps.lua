@@ -9,10 +9,6 @@ local keymap = vim.keymap
 keymap.set("n", "<left>", "gT")
 keymap.set("n", "<right>", "gt")
 
--- there are builtin keymaps for this now, but I like that it shows
-keymap.set("n", "]d", vim.diagnostic.goto_next)
-keymap.set("n", "[d", vim.diagnostic.goto_prev)
-
 -- basic movement keybinds
 keymap.set("n", "<c-j>", "<c-w><c-j>")
 keymap.set("n", "<c-k>", "<c-w><c-k>")
@@ -35,8 +31,6 @@ keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "n", "nzz") -- center next-searching 
 keymap.set("n", "N", "nzz")
 
--- turn off hightlight
-keymap.set("n", "<leader>no", "<cmd>nohlsearch<cr>")
 
 -- paste our contents without replace what’s in the register
 keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without updating register" })
@@ -44,6 +38,17 @@ keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without updating register"
 -- keep indenting or outdenting without needing to reselect
 keymap.set("v", "<", "<gv", { desc = "Stay in visual mode during outdent" })
 keymap.set("v", ">", ">gv", { desc = "Stay in visual mode during indent" })
+
+-- Toggle hlsearch if it's on, otherwise just do "enter"
+keymap.set("n", "<CR>", function()
+  ---@diagnostic disable-next-line: undefined-field
+  if vim.v.hlsearch == 1 then
+    vim.cmd.nohl()
+    return ""
+  else
+    return vim.keycode "<CR>"
+  end
+end, { expr = true })
 
 -- Easily hit escape in terminal mode.
 vim.keymap.set("t", "<leader>te", "<c-\\><c-n>") -- terminal exit

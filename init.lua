@@ -4,9 +4,10 @@ require("config.keymaps")
 require("config.autocmds")
 --  comment to unplug-ins
 
--- other stuffs
+-- GUIs
 spec("plugins.colorscheme")
 spec("plugins.others")
+spec("plugins.statusline")
 
 -- file navigation
 spec("plugins.telescope")
@@ -17,7 +18,7 @@ spec("plugins.oil")
 spec("plugins.completion")
 spec("plugins.mason")
 spec("plugins.tree-sitter")
---spec("plugins.lsp")
+spec("plugins.lsp")
 
 --obsidian note-taking
 spec("plugins.obsidian")
