@@ -51,9 +51,6 @@ function M.config()
         previewer = false,
         initial_mode = "normal",
       },
-      colorscheme = {
-        enable_preview = true,
-      },
     },
     extensions = {
       fzf = {

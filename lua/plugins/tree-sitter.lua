@@ -6,7 +6,7 @@ local M = {
 }
 
 function M.config()
-  require("nvim-treesitter.configs").setup {
+  require("nvim-treesitter.configs").setup({
     ensure_installed = { 
       "lua", "markdown", "markdown_inline", "bash", "python",
       "vim", "vimdoc", "query", "cpp", "c",
@@ -24,7 +24,7 @@ function M.config()
     --autopairs = {
       --enable = true;
     --},
-  }
+  })
 end
 
 return M

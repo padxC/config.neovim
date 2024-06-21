@@ -10,6 +10,7 @@ opt.signcolumn = "yes"
 --opt.colorcolumn = "80"
 opt.guicursor = "n-v-i-c:block-Cursor"
 --opt.cursorline = true
+opt.termguicolors = true
 
 -- tabs & indentation
 opt.tabstop = 2
@@ -32,6 +33,10 @@ opt.swapfile = false
 opt.backup = false
 opt.undofile = true
 opt.mouse = "a"
+
+-- completion
+opt.completeopt = "menu,menuone,noselect"
+opt.shortmess:append "c"
 
 ---
 opt.inccommand = "split"

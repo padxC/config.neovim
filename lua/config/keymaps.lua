@@ -54,7 +54,7 @@ end, { expr = true })
 vim.keymap.set("t", "<leader>te", "<c-\\><c-n>") -- terminal exit
 
 -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set("n", "<leader>st", function() -- start terminal
+vim.keymap.set("n", "<leader>to", function() -- terminal open
   vim.cmd.new()
   vim.cmd.wincmd "J"
   vim.api.nvim_win_set_height(0, 12)

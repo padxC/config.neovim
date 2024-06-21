@@ -3,10 +3,8 @@ local M = {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    {
       "folke/neodev.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
-    },
   }
 }
 
@@ -28,8 +26,7 @@ M.on_attach = function(client, bufnr) -- when the lsp is attached
     vim.lsp.inlay_hint.enable(true, { only_current_line = false })
   end
 end
-
---##########--
+---]]]
 
 function M.common_capabilities() -- turning on snippet support
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -88,11 +85,6 @@ function M.config()
  }
 
   vim.diagnostic.config(default_diagnostic_config)
-
-  -- GUI things
-  for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-  end
 
   -- rounded GUI stuffs
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
