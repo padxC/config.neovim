@@ -23,11 +23,12 @@ local M = {
 }
 
 function M.config()
---
-  local lspkind = require "lspkind"
+  local cmp = require("cmp")
+  local lspkind = require("lspkind")
+  local ls = require("luasnip")
+
   lspkind.init {}
 
-  local cmp = require "cmp"
   cmp.setup {
     sources = {
       { name = "nvim_lsp" },
@@ -35,6 +36,13 @@ function M.config()
       { name = "buffer" },
       { name = "path" },
     },
+    --]]
+    snippet = { -- for lua users
+      expand = function(args)
+        require("luasnip").lsp_expand(args.body)
+      end,
+    },
+    --]]
     mapping = {
       ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
@@ -53,14 +61,26 @@ function M.config()
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     },
-    snippet = { -- for lua users
-      expand = function(args)
-        require("luasnip").lsp_expand(args.body)
-      end,
-    },
   }
 
-  local ls = require "luasnip"
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ "/", "?" }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = "buffer" },
+   },
+  })
+
+    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = "path" },
+    }, {
+      { name = "cmdline" },
+    }),
+  })
+
   ls.config.set_config {
     history = false,
     updateevents = "TextChanged,TextChangedI",

@@ -1,9 +1,8 @@
 -- others
 local M = {
-  "alexghergh/nvim-tmux-navigation", -- tmux intergration
-  "ThePrimeagen/vim-be-good", -- vim chill, training
-  "stevearc/dressing.nvim", -- a little aesthetic GUI
-  event = "VeryLazy",
+  { "alexghergh/nvim-tmux-navigation", event = "VeryLazy" }, -- tmux intergration
+  { "ThePrimeagen/vim-be-good", event = "VeryLazy" }, -- vim chill, training
+  { "stevearc/dressing.nvim", event = "VeryLazy" }, -- a little aesthetic GUI
 }
 
 function M.config()
