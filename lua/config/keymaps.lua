@@ -16,10 +16,10 @@ keymap.set("n", "<c-l>", "<c-w><c-l>")
 keymap.set("n", "<c-h>", "<c-w><c-h>")
 
 -- control size 
-keymap.set("n", "<M-.>", "<c-w>5<")
-keymap.set("n", "<M-,>", "<c-w>5>")
-keymap.set("n", "<M-t>", "<C-W>+")
-keymap.set("n", "<M-s>", "<C-W>-")
+keymap.set("n", "<M->>", "<c-w>5<")
+keymap.set("n", "<M-<>", "<c-w>5>")
+keymap.set("n", "<M-+>", "<C-W>+")
+keymap.set("n", "<M-->", "<C-W>-")
 
 -- move a blocks of text up/down with K/J in visual mode
 keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
@@ -31,13 +31,15 @@ keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "n", "nzz") -- center next-searching 
 keymap.set("n", "N", "nzz")
 
-
 -- paste our contents without replace what’s in the register
 keymap.set("x", "<leader>p", "\"_dP", { desc = "Paste without updating register" })
 
 -- keep indenting or outdenting without needing to reselect
 keymap.set("v", "<", "<gv", { desc = "Stay in visual mode during outdent" })
 keymap.set("v", ">", ">gv", { desc = "Stay in visual mode during indent" })
+
+-- ctrl + backspace deletion +555% speed
+keymap.set('i', '<C-h>', '<C-w>')
 
 -- Toggle hlsearch if it's on, otherwise just do "enter"
 keymap.set("n", "<CR>", function()
