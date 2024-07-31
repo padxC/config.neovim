@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 })
 
 -- Set local settings for terminal buffers
-vim.api.nvim_create_autocmd("TermOpen", {
+vim.api.nvim_create_autocmd({ "TermOpen" }, {
   group = vim.api.nvim_create_augroup("custom-term-open", {}),
   callback = function()
     local set = vim.opt_local
@@ -22,9 +22,14 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  pattern = "",
+  command = "set fo-=c fo-=r fo-=o"
+})
+
 -- Auto wrap && spell
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "gitcommit", "markdown", "NeogitCommitMessage" },
+  pattern = { "gitcommit", "markdown", "NeogitCommitMessage", "text" },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true

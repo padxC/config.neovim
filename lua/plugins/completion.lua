@@ -1,33 +1,53 @@
-
 local M = {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    { "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
-    { "hrsh7th/cmp-path", event = "InsertEnter" },
-    { "hrsh7th/cmp-buffer", event = "InsertEnter" },
-    { "hrsh7th/cmp-cmdline", event = "InsertEnter" },
-  -----[[
+    { "hrsh7th/cmp-nvim-lsp",     event = "InsertEnter" },
+    { "hrsh7th/cmp-path",         event = "InsertEnter" },
+    { "hrsh7th/cmp-buffer",       event = "InsertEnter" },
+    { "hrsh7th/cmp-cmdline",      event = "InsertEnter" },
+    -----[[
     { "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
-    { "onsails/lspkind.nvim", event = "InsertEnter" },
+    { "onsails/lspkind.nvim",     event = "InsertEnter" },
 
-    { 
-      "L3MON4D3/LuaSnip", 
-        build = "make install_jsregexp",
-        event = "InsertEnter",
-        dependencies = {
-          "rafamadriz/friendly-snippets",
+    {
+      "L3MON4D3/LuaSnip",
+      build = "make install_jsregexp",
+      event = "InsertEnter",
+      dependencies = {
+        "rafamadriz/friendly-snippets",
       },
     },
+    --{
+    --"windwp/nvim-autopairs",
+    --event = { "InsertEnter" },
+    --},
   },
 }
 
 function M.config()
-  local cmp = require("cmp")
   local lspkind = require("lspkind")
-  local ls = require("luasnip")
-
   lspkind.init {}
+
+  --local autopairs = require("nvim-autopairs")
+  --
+  ---- configure autopairs
+  --autopairs.setup({
+  --check_ts = true, -- enable treesitter
+  --ts_config = {
+  --lua = { "string" }, -- don't add pairs in lua string treesitter nodes
+  --javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
+  --},
+  --})
+
+  -- import nvim-autopairs completion functionality
+  --local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
+  -- import nvim-cmp plugin (completions plugin)
+  local cmp = require("cmp")
+
+  -- make autopairs and completion work together
+  --cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
   cmp.setup {
     sources = {
@@ -68,10 +88,10 @@ function M.config()
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = "buffer" },
-   },
+    },
   })
 
-    -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(":", {
     mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
@@ -81,7 +101,8 @@ function M.config()
     }),
   })
 
-  ls.config.set_config {
+  local luasnip = require("luasnip")
+  luasnip.config.set_config {
     history = false,
     updateevents = "TextChanged,TextChangedI",
   }

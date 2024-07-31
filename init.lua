@@ -15,11 +15,14 @@ spec("plugins.telescope")
 spec("plugins.harpoon")
 spec("plugins.oil")
 
--- lsp && cmp
-spec("plugins.completion")
+-- lsp 
 spec("plugins.mason")
-spec("plugins.tree-sitter")
 spec("plugins.lsp")
+
+-- syntax, formatting, completion
+spec("plugins.completion")
+spec("plugins.tree-sitter")
+spec("plugins.formatting")
 
 --obsidian note-taking
 spec("plugins.obsidian")
