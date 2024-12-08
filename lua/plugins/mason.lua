@@ -22,12 +22,12 @@ function M.config()
     ensure_installed = {
       "lua_ls",
       "cssls", "html", --"tailwindcss",
-
-      "tsserver",
-      "pyright",
-      "bashls",
-      "jsonls",
-      --"clangd",
+      "emmet_ls",
+      --"tsserver",
+      --"pyright",
+      --"bashls",
+      --"jsonls",
+      "clangd",
     },
     -- auto-install configured servers (with lspconfig)
     automatic_installation = true,
@@ -39,9 +39,9 @@ function M.config()
     start_delay = 3000,
     debounce_hours = 12,
     ensure_installed = {
-      "prettier",
+      --"prettier",
       "stylua", -- lua formatter
-      "eslint_d",
+      --"eslint_d",
     },
   })
 end

@@ -57,12 +57,13 @@ function M.config()
 		"lua_ls",
 		"cssls",
 		"html",
+		"emmet_ls",
 		--"eslint",
-		"tsserver",
+		--"tsserver",
 		--"pyright",
-		"bashls",
-		"jsonls",
-		"yamlls",
+		--"bashls",
+		--"jsonls",
+		--"yamlls",
 		--"clangd",
 	}
 

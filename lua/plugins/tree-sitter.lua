@@ -23,7 +23,6 @@ function M.config()
 			"scss",
 			"css",
 			"javascript", --"typescript",
-			"vue", --"svelte",
 		},
 		highlight = {
 			enable = true,

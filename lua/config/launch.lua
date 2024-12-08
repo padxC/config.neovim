@@ -1,4 +1,3 @@
-
 LAZY_PLUGIN_SPEC = {}
 
 function spec(item)
