@@ -37,22 +37,27 @@ keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "n", "nzz") -- center next-searching
 keymap.set("n", "N", "nzz")
 
--- paste out && delete contents without replace what’s in the register
+-- not affecting registers
 keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without updating register" })
 keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+keymap.set("n", "x", '"_x')
 
 -- keep indenting or outdenting without needing to reselect
 keymap.set("v", "<", "<gv", { desc = "Stay in visual mode during outdent" })
 keymap.set("v", ">", ">gv", { desc = "Stay in visual mode during indent" })
 
+-- increment/decrement
+keymap.set("n", "+", "<C-a>")
+keymap.set("n", "-", "<C-x>")
+
 -- ctrl + backspace deletion +555% speed
 keymap.set("i", "<C-h>", "<C-w>")
 
--- Easily hit escape in terminal mode.
-vim.keymap.set("t", "<leader>te", "<c-\\><c-n>") -- terminal exit
+-- easily hit escape in terminal mode.
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>") -- escape of terminal
 
 -- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set("n", "<leader>to", function() -- terminal open
+vim.keymap.set("n", "<leader>T", function() --  Termninal
 	vim.cmd.new()
 	vim.cmd.wincmd("J")
 	vim.api.nvim_win_set_height(0, 12)

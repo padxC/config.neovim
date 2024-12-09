@@ -7,7 +7,8 @@ local M = {
 	},
 }
 
-local function lsp_keymaps(bufnr) -- setup keymap for the "BUFFER" where lsp is active
+-- setup keymap for the "BUFFER" where lsp is active
+local function lsp_keymaps(bufnr)
 	local opts = { noremap = true, silent = true }
 	local keymap = vim.api.nvim_buf_set_keymap
 	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -22,22 +23,31 @@ M.on_attach = function(client, bufnr)
 	lsp_keymaps(bufnr)
 end
 
-function M.common_capabilities() -- turning on snippet support
+function M.capabilities() -- turning on snippet support
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 	return capabilities
 end
 
 --]]
+local border = {
+	{ "╔", "FloatBorder" },
+	{ "═", "FloatBorder" },
+	{ "☘︎", "FloatBorder" },
+	{ "║", "FloatBorder" },
+	{ "╝", "FloatBorder" },
+	{ "═", "FloatBorder" },
+	{ "╚", "FloatBorder" },
+	{ "║", "FloatBorder" },
+}
 
 function M.config()
 	local lspconfig = require("lspconfig")
 
-	--  GUI stuffs
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-	vim.lsp.handlers["textDocument/signatureHelp"] =
-		vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-	require("lspconfig.ui.windows").default_options.border = "rounded"
+	--  this is for change border of hover
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
+	require("lspconfig.ui.windows").default_options.border = border
 
 	vim.diagnostic.config({
 		virtual_text = false,
@@ -53,6 +63,7 @@ function M.config()
 		},
 	})
 
+	-- list server for specific setup
 	local servers = {
 		"lua_ls",
 		"cssls",
@@ -66,11 +77,16 @@ function M.config()
 		--"yamlls",
 		--"clangd",
 	}
-
-	for _, server in ipairs(servers) do -- loop through severs lsp (create lspsettings dir for each language)
-		-- extend
+	-- loop through severs lsp (create lspsettings dir for each language)
+	for _, server in ipairs(servers) do
+		local opts = {
+			on_attach = M.on_attach,
+			capabilities = M.capabilities(),
+		}
+		-- extend on lspsettings directory
 		local require_ok, settings = pcall(require, "plugins.lspsettings." .. server)
 		if require_ok then
+			--use the settings of lspsettings files
 			opts = vim.tbl_deep_extend("force", settings, opts)
 		end
 
@@ -80,11 +96,7 @@ function M.config()
 		end
 
 		-- add specific for each server
-
-		lspconfig[server].setup({
-			on_attach = M.on_attach,
-			capabilities = M.common_capabilities(),
-		})
+		lspconfig[server].setup({ opts })
 	end
 end
 

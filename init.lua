@@ -7,15 +7,16 @@ require("config.autocmds")
 
 -- GUIs
 spec("plugins.colorscheme")
-spec("plugins.others")
 spec("plugins.lualine")
+spec("plugins.ui")
 
 -- file navigation
 spec("plugins.telescope")
 spec("plugins.harpoon")
 spec("plugins.oil")
+spec("plugins.tmux")
 
--- lsp 
+-- lsp
 spec("plugins.mason")
 spec("plugins.lsp")
 

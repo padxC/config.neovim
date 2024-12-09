@@ -12,11 +12,11 @@ function M.config()
 		underline = true,
 		bold = true,
 		italic = {
-			strings = true,
-			emphasis = true,
+			strings = false,
+			emphasis = false,
 			comments = true,
 			operators = false,
-			folds = true,
+			folds = false,
 		},
 		strikethrough = true,
 		invert_selection = false,
@@ -24,11 +24,11 @@ function M.config()
 		invert_tabline = false,
 		invert_intend_guides = false,
 		inverse = true, -- invert background for search, diffs, statuslines and errors
-		contrast = "", -- can be "hard", "soft" or empty string
+		contrast = "hard", -- can be "hard", "soft" or empty string
 		palette_overrides = {},
 		overrides = {},
 		dim_inactive = false,
-		transparent_mode = false,
+		transparent_mode = true,
 	})
 	vim.o.background = "dark"
 	vim.cmd("colorscheme gruvbox")
