@@ -3,6 +3,7 @@ require("config.launch")
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
+require("config.terminal")
 -- comment to unplug-ins
 
 -- GUIs

@@ -9,6 +9,10 @@ local keymap = vim.keymap
 keymap.set("n", "<left>", "gT")
 keymap.set("n", "<right>", "gt")
 
+-- quickfix
+keymap.set("n", "<C-n>", "<cmd>cnext<CR>")
+keymap.set("n", "<C-p>", "<cmd>cprevious<CR>")
+
 -- basic movement keybinds
 keymap.set("n", "<c-j>", "<c-w><c-j>")
 keymap.set("n", "<c-k>", "<c-w><c-k>")
@@ -52,15 +56,3 @@ keymap.set("n", "-", "<C-x>")
 
 -- ctrl + backspace deletion +555% speed
 keymap.set("i", "<C-h>", "<C-w>")
-
--- easily hit escape in terminal mode.
-vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>") -- escape of terminal
-
--- Open a terminal at the bottom of the screen with a fixed height.
-vim.keymap.set("n", "<leader>T", function() --  Termninal
-	vim.cmd.new()
-	vim.cmd.wincmd("J")
-	vim.api.nvim_win_set_height(0, 12)
-	vim.wo.winfixheight = true
-	vim.cmd.term()
-end)

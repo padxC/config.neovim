@@ -1,6 +1,9 @@
 local M = { -- Ctrl-u && Ctrl-d to control preview
 	"nvim-telescope/telescope.nvim",
-	dependencies = { { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true } },
+	dependencies = {
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
+		{ "nvim-lua/plenary.nvim" },
+	},
 }
 
 function M.config()
@@ -11,7 +14,7 @@ function M.config()
 		"<cmd>Telescope buffers<cr>",
 		{ noremap = true, silent = true, desc = "[S]earch Buffers" }
 	)
-	vim.api.nvim_set_keymap(
+	vim.api.nvim_set_keymap( -- in current Directory
 		"n",
 		"<leader>sf",
 		"<cmd>Telescope find_files<cr>",
@@ -35,7 +38,12 @@ function M.config()
 		"<cmd>Telescope grep_string<cr>",
 		{ noremap = true, silent = true, desc = "[S]earch [W]ords in Files" }
 	)
-	--vim.api.nvim_set_keymap("n", "<leader>sr", "<cmd>Telescope oldfiles<cr>", { noremap = true, silent = true, desc = "[S]earch [R]ecent Files" })
+	vim.api.nvim_set_keymap(
+		"n",
+		"<leader>sr",
+		"<cmd>Telescope oldfiles<cr>",
+		{ noremap = true, silent = true, desc = "[S]earch [R]ecent Files" }
+	)
 
 	local actions = require("telescope.actions")
 
@@ -61,7 +69,7 @@ function M.config()
 					["<C-Space>"] = require("telescope.actions.layout").toggle_preview,
 				},
 				n = {
-					["<C-c>"] = actions.close,
+					["<Esc>"] = actions.close,
 					["<C-p>"] = actions.move_selection_previous,
 					["<C-n>"] = actions.move_selection_next,
 				},

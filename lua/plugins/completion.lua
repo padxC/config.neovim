@@ -2,11 +2,13 @@ local M = {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
-		{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" }, --required
-		{ "hrsh7th/cmp-path", event = "InsertEnter" },
+		{ "hrsh7th/cmp-nvim-lsp", event = "InsertEnter" },
 		{ "hrsh7th/cmp-buffer", event = "InsertEnter" },
+		{ "hrsh7th/cmp-path", event = "InsertEnter" },
 		{ "hrsh7th/cmp-cmdline", event = "InsertEnter" },
+		{ "hrsh7th/cmp-emoji", event = "InsertEnter" },
 		-----[[
+
 		{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
 		{ "onsails/lspkind.nvim", event = "InsertEnter" },
 
@@ -26,13 +28,9 @@ local M = {
 }
 
 function M.config()
-	local lspkind = require("lspkind")
-	lspkind.init({})
-
-	local autopairs = require("nvim-autopairs")
-
-	-- configure autopairs
-	autopairs.setup({
+	require("lspkind").init({})
+	require("nvim-autopairs").setup({
+		disable_filetype = { "TelescopePrompt", "vim" },
 		check_ts = true, -- enable treesitter
 		ts_config = {
 			lua = { "string" }, -- don't add pairs in lua string treesitter nodes
@@ -40,18 +38,20 @@ function M.config()
 			java = false,
 		},
 	})
+	-- configure autopairs
 
 	-- import nvim-autopairs completion functionality
 	local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-
 	-- import nvim-cmp plugin (completions plugin)
 	local cmp = require("cmp")
+	-- make autopairs and completion work together
+	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 	local border = {
 		border = {
 			"╔",
 			"═",
-			"☘︎",
+			"♚",
 			"║",
 			"╝",
 			"═",
@@ -59,17 +59,9 @@ function M.config()
 			"║",
 		},
 	}
-
-	-- make autopairs and completion work together
-	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+	--☘
 
 	cmp.setup({
-		sources = {
-			{ name = "nvim_lsp" },
-			{ name = "luasnip" },
-			{ name = "buffer" },
-			{ name = "path" },
-		},
 		--]]
 		snippet = { -- for lua users
 			expand = function(args)
@@ -77,14 +69,8 @@ function M.config()
 			end,
 		},
 		window = {
-			completion = cmp.config.window.bordered({
-				border,
-				scollbar = false,
-			}),
+			completion = cmp.config.window.bordered(border),
 			documentation = cmp.config.window.bordered(border),
-		},
-		experimental = { -- show ghost_text in completion
-			ghost_text = true,
 		},
 		--]]
 		mapping = {
@@ -100,6 +86,22 @@ function M.config()
 				}),
 				{ "i", "c" }
 			),
+		},
+		sources = cmp.config.sources({
+			{ -- For luasnip users.
+				name = "luasnip",
+				option = { show_autosnippets = true, use_show_condition = false },
+			},
+			{ name = "nvim_lsp" },
+			--{ name = "emoji" },
+			{ name = "buffer" },
+			{ name = "path" },
+			--{ name = "ultisnips" }, -- For ultisnips users.
+			-- { name = 'snippy' }, -- For snippy users.
+		}),
+
+		experimental = { -- show ghost_text in completion
+			ghost_text = false,
 		},
 		confirm_opts = {
 			behavior = cmp.ConfirmBehavior.Replace,

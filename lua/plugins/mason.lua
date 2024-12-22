@@ -25,10 +25,9 @@ function M.config()
 			"html", --"tailwindcss",
 			"emmet_ls",
 			"emmet_language_server",
-			--"tsserver",
+			"somesass_ls", -- scss
 			--"pyright",
 			--"bashls",
-			--"jsonls",
 			"clangd",
 		},
 		-- auto-install configured servers (with lspconfig)
@@ -41,7 +40,7 @@ function M.config()
 		start_delay = 3000,
 		debounce_hours = 12,
 		ensure_installed = {
-			--"prettier",
+			"prettier",
 			"stylua", -- lua formatter
 			--"eslint_d",
 			"clangd",

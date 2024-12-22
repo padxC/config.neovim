@@ -17,10 +17,10 @@ function M.config()
 			html = { "prettier" },
 			json = { "prettier" },
 			yaml = { "prettier" },
-			--markdown = { "prettier" },
+			markdown = { "prettier" },
 			--graphql = { "prettier" },
 			--liquid = { "prettier" },
-			--python = { "isort", "black" },
+			python = { "isort", "black" },
 		},
 		format_on_save = {
 			lsp_fallback = true,

@@ -13,43 +13,30 @@ opt.signcolumn = "yes:1"
 opt.termguicolors = true -- enable terminal colors
 opt.background = "dark"
 
-opt.fillchars = { --{{{
-	--stl = " ",
-	--stlnc = " ",
-	--foldopen = "",
-	--foldclose = "",
-	--fold = " ",
-	--foldsep = " ",
-	--diff = "╱",
-	--eob = "'",
-	horiz = "━",
+opt.fillchars = { -- aesthetic neovim
+	stl = " ",
+	stlnc = " ",
+	horiz = "━", -- line when split windows
 	horizup = "┻",
 	horizdown = "┳",
 	vert = "┃",
 	vertleft = "┨",
 	vertright = "┣",
 	verthoriz = "╋",
-	fold = "⠀",
-	eob = " ",
-	diff = "┃",
-	msgsep = "‾",
+	eob = " ", -- remove the ~ on left side --'
+	--diff = "┃", --╱ ⣿ ░ ─
+	--msgsep = "‾",
+	--fold = " ",
 	foldsep = "│",
-	foldclose = "▶",
-	foldopen = "▼",
+	foldclose = "▶", --
+	foldopen = "▼", --
 }
 
 opt.listchars:append({
-	--tab = "▸ ",
-	tab = "│ ",
-	--multispace = "·",
-	--lead = "·",
-	--trail = "·",
-	--nbsp = "·",
-	--tab = "·┈",
+	tab = " │", -- alternative ▸, ·, │─
+	lead = "￮",
 	trail = "￮",
 	multispace = "￮",
-	extends = "▶",
-	precedes = "◀",
 	nbsp = "‿",
 })
 

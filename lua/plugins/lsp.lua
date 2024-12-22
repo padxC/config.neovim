@@ -69,6 +69,8 @@ function M.config()
 		"cssls",
 		"html",
 		"emmet_ls",
+		"emmet_language_server",
+		"somesass_ls", -- scss
 		--"eslint",
 		--"tsserver",
 		--"pyright",
