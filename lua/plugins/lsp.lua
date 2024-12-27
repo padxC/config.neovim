@@ -71,6 +71,7 @@ function M.config()
 		"emmet_ls",
 		"emmet_language_server",
 		"somesass_ls", -- scss
+		"tailwindcss",
 		--"eslint",
 		--"tsserver",
 		--"pyright",

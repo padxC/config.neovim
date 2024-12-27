@@ -6,6 +6,9 @@ require("config.autocmds")
 require("config.terminal")
 -- comment to unplug-ins
 
+-- mini library
+spec("plugins.mini")
+
 -- GUIs
 spec("plugins.colorscheme")
 spec("plugins.lualine")

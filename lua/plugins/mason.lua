@@ -26,6 +26,7 @@ function M.config()
 			"emmet_ls",
 			"emmet_language_server",
 			"somesass_ls", -- scss
+			"tailwindcss",
 			--"pyright",
 			--"bashls",
 			"clangd",
@@ -43,7 +44,6 @@ function M.config()
 			"prettier",
 			"stylua", -- lua formatter
 			--"eslint_d",
-			"clangd",
 		},
 	})
 end
