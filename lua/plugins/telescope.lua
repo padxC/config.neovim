@@ -8,42 +8,23 @@ local M = { -- Ctrl-u && Ctrl-d to control preview
 
 function M.config()
 	-- key mappings for Telescope
-	vim.api.nvim_set_keymap(
-		"n",
-		"<leader>sb",
-		"<cmd>Telescope buffers<cr>",
-		{ noremap = true, silent = true, desc = "[S]earch Buffers" }
-	)
-	vim.api.nvim_set_keymap( -- in current Directory
-		"n",
-		"<leader>sf",
-		"<cmd>Telescope find_files<cr>",
-		{ noremap = true, silent = true, desc = "[S]earch Files" }
-	)
-	vim.api.nvim_set_keymap(
-		"n",
-		"<leader>sg",
-		"<cmd>Telescope live_grep<cr>",
-		{ noremap = true, silent = true, desc = "[S]earch Words" }
-	)
-	vim.api.nvim_set_keymap(
-		"n",
-		"<leader>sh",
-		"<cmd>Telescope help_tags<cr>",
-		{ noremap = true, silent = true, desc = "[S]earch Helps" }
-	)
-	vim.api.nvim_set_keymap(
-		"n",
-		"<leader>sw",
-		"<cmd>Telescope grep_string<cr>",
-		{ noremap = true, silent = true, desc = "[S]earch [W]ords in Files" }
-	)
-	vim.api.nvim_set_keymap(
-		"n",
-		"<leader>sr",
-		"<cmd>Telescope oldfiles<cr>",
-		{ noremap = true, silent = true, desc = "[S]earch [R]ecent Files" }
-	)
+
+	local mappings = {
+		{ key = "<leader>sb", cmd = "buffers", desc = "[S]earch [B]uffers" },
+		{ key = "<leader>sf", cmd = "find_files", desc = "[S]earch [F]iles" }, -- in current Directory
+		{ key = "<leader>sr", cmd = "oldfiles", desc = "[S]earch [R]ecent Files" },
+		{ key = "<leader>sh", cmd = "help_tags", desc = "[S]earch Helps" },
+		{ key = "<leader>sg", cmd = "live_grep", desc = "[S]earch Words" },
+		{ key = "<leader>sw", cmd = "grep_string", desc = "[S]earch [W]ords " }, -- in current File
+	}
+
+	for _, map in ipairs(mappings) do
+		vim.api.nvim_set_keymap("n", map.key, "<cmd>Telescope " .. map.cmd .. "<cr>", {
+			noremap = true,
+			silent = true,
+			desc = map.desc,
+		})
+	end
 
 	local actions = require("telescope.actions")
 

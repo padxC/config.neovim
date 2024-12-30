@@ -11,8 +11,8 @@ function M.config()
 	local opts = { noremap = true, silent = true }
 
 	-- Change keybindings
-	keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", opts)
-	keymap("n", "<leader>hl", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", opts)
+	keymap("n", "<leader>ha", "<cmd>lua require('harpoon.mark').add_file()<cr>", opts) -- [H]apoon [A]dd
+	keymap("n", "<leader>hl", "<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>", opts) -- [H]appon [L]ist
 
 	-- Set <leader>1 to <leader>5 for selecting files
 	for idx = 1, 5 do

@@ -21,6 +21,15 @@ end
 
 M.on_attach = function(client, bufnr)
 	lsp_keymaps(bufnr)
+
+	if client.supports_method("textDocument/inlayHint") then
+		vim.lsp.inlay_hint.enable(true, { bufnr })
+	end
+end
+
+M.toggle_inlay_hints = function()
+	local bufnr = vim.api.nvim_get_current_buf()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr }), { bufnr })
 end
 
 function M.capabilities() -- turning on snippet support
@@ -57,7 +66,7 @@ function M.config()
 		float = {
 			focusable = true,
 			style = "minimal",
-			border = "rounded",
+			border = border,
 			header = "",
 			prefix = "",
 		},
@@ -95,7 +104,7 @@ function M.config()
 
 		-- neodev for easy work with config files
 		if server == "lua_ls" then
-			require("neodev").setup({})
+			require("neodev").setup()
 		end
 
 		-- add specific for each server

@@ -44,6 +44,7 @@ function M.config()
 			"prettier",
 			"stylua", -- lua formatter
 			--"eslint_d",
+			"rustywind", -- tailwind formatter
 		},
 	})
 end

@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 	end,
 })
 
--- Set local settings for terminal buffers
+-- set local settings for terminal buffers
 vim.api.nvim_create_autocmd({ "TermOpen" }, {
 	group = vim.api.nvim_create_augroup("custom-term-open", {}),
 	callback = function()
@@ -22,12 +22,19 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
 	end,
 })
 
+-- disable comment when insert next line
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+	callback = function()
+		vim.cmd("set formatoptions-=cro")
+	end,
+})
+
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
 	pattern = "",
 	command = "set fo-=c fo-=r fo-=o",
 })
 
--- Auto wrap && spell
+-- auto wrap && spell
 vim.api.nvim_create_autocmd({ "FileType" }, {
 	pattern = { "gitcommit", "markdown", "NeogitCommitMessage", "text" },
 	callback = function()

@@ -7,6 +7,10 @@ local M = {
 		{ "hrsh7th/cmp-path", event = "InsertEnter" },
 		{ "hrsh7th/cmp-cmdline", event = "InsertEnter" },
 		{ "hrsh7th/cmp-emoji", event = "InsertEnter" },
+
+		-- vsnip user
+		-- { "hrsh7th/cmp-vsnip", event = "InsertEnter" },
+		-- { "hrsh7th/vim-vsnip", event = "InsertEnter" },
 		-----[[
 
 		{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
@@ -65,6 +69,7 @@ function M.config()
 		--]]
 		snippet = { -- for lua users
 			expand = function(args)
+				-- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
 				require("luasnip").lsp_expand(args.body)
 			end,
 		},
@@ -88,14 +93,12 @@ function M.config()
 			),
 		},
 		sources = cmp.config.sources({
-			{ -- For luasnip users.
-				name = "luasnip",
-				option = { show_autosnippets = true, use_show_condition = false },
-			},
+			{ name = "luasnip" }, -- for luasnip users.
 			{ name = "nvim_lsp" },
-			--{ name = "emoji" },
+			-- { name = "vsnip" }, -- for vsnip user
 			{ name = "buffer" },
 			{ name = "path" },
+			--{ name = "emoji" },
 			--{ name = "ultisnips" }, -- For ultisnips users.
 			-- { name = 'snippy' }, -- For snippy users.
 		}),

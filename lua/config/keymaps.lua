@@ -5,15 +5,11 @@ vim.g.maplocalleader = " "
 ---===---
 local keymap = vim.keymap
 
--- tabs
-keymap.set("n", "<left>", "gT")
-keymap.set("n", "<right>", "gt")
-
--- quickfix
+-- navigate quickfix list
 keymap.set("n", "<C-n>", "<cmd>cnext<CR>")
 keymap.set("n", "<C-p>", "<cmd>cprevious<CR>")
 
--- basic movement keybinds
+-- navigate window keybinds
 keymap.set("n", "<c-j>", "<c-w><c-j>")
 keymap.set("n", "<c-k>", "<c-w><c-k>")
 keymap.set("n", "<c-l>", "<c-w><c-l>")
@@ -39,20 +35,24 @@ keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "n", "nzz") -- center next-searching
-keymap.set("n", "N", "nzz")
+keymap.set("n", "N", "Nzz")
 
--- not affecting registers
-keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without updating register" })
-keymap.set({ "n", "v" }, "<leader>d", [["_d]])
+-- not affecting registers && jumplist
 keymap.set("n", "x", '"_x')
+keymap.set("x", "<leader>p", '"_dP', { desc = "Paste without updating register" })
+keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete without updating register" })
+keymap.set("n", "}", '<cmd>execute "keepjumps norm! " . v:count1 . "}"<CR>', { silent = true })
+keymap.set("n", "{", '<cmd>execute "keepjumps norm! " . v:count1 . "{"<CR>', { silent = true })
 
 -- keep indenting or outdenting without needing to reselect
 keymap.set("v", "<", "<gv", { desc = "Stay in visual mode during outdent" })
 keymap.set("v", ">", ">gv", { desc = "Stay in visual mode during indent" })
 
 -- increment/decrement
-keymap.set("n", "+", "<C-a>")
-keymap.set("n", "-", "<C-x>")
+-- keymap.set({ "n", "v" }, "+", "<C-a>")
+-- keymap.set({ "n", "v" }, "-", "<C-x>")
 
 -- ctrl + backspace deletion +555% speed
 keymap.set("i", "<C-h>", "<C-w>")
+
+--

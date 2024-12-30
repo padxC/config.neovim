@@ -12,7 +12,8 @@ spec("plugins.mini")
 -- GUIs
 spec("plugins.colorscheme")
 spec("plugins.lualine")
-spec("plugins.ui")
+spec("plugins.dressing")
+spec("plugins.fidget")
 
 -- file navigation
 spec("plugins.telescope")
