@@ -23,6 +23,9 @@ function M.config()
 			"scss",
 			"css",
 			"javascript", --"typescript",
+			-- for assembly syntax
+			"asm",
+			"nasm",
 		},
 		highlight = { enable = true, additional_vim_regex_highlighting = false },
 		indent = { enable = true },

@@ -15,12 +15,6 @@ keymap.set("n", "<c-k>", "<c-w><c-k>")
 keymap.set("n", "<c-l>", "<c-w><c-l>")
 keymap.set("n", "<c-h>", "<c-w><c-h>")
 
--- control size
---keymap.set("n", "<M->>", "<c-w>5<")
---keymap.set("n", "<M-<>", "<c-w>5>")
---keymap.set("n", "<M-+>", "<C-W>+")
---keymap.set("n", "<M-->", "<C-W>-")
-
 -- using aserowy/tmux.nvim for resizing
 keymap.set("n", "<M-h>", '<Cmd>lua require("tmux").resize_left()<CR>', { silent = true })
 keymap.set("n", "<M-j>", '<Cmd>lua require("tmux").resize_bottom()<CR>', { silent = true })
@@ -54,5 +48,3 @@ keymap.set("v", ">", ">gv", { desc = "Stay in visual mode during indent" })
 
 -- ctrl + backspace deletion +555% speed
 keymap.set("i", "<C-h>", "<C-w>")
-
---

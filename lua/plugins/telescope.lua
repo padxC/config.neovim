@@ -11,11 +11,13 @@ function M.config()
 
 	local mappings = {
 		{ key = "<leader>sb", cmd = "buffers", desc = "[S]earch [B]uffers" },
-		{ key = "<leader>sf", cmd = "find_files", desc = "[S]earch [F]iles" }, -- in current Directory
+		{ key = "<leader>sf", cmd = "find_files", desc = "[S]earch Files (directory)" },
 		{ key = "<leader>sr", cmd = "oldfiles", desc = "[S]earch [R]ecent Files" },
-		{ key = "<leader>sh", cmd = "help_tags", desc = "[S]earch Helps" },
-		{ key = "<leader>sg", cmd = "live_grep", desc = "[S]earch Words" },
-		{ key = "<leader>sw", cmd = "grep_string", desc = "[S]earch [W]ords " }, -- in current File
+		{ key = "<leader>sh", cmd = "help_tags", desc = "[S]earch [H]elps" },
+		{ key = "<leader>sW", cmd = "live_grep", desc = "[S]earch Words (workspace)" },
+		{ key = "<leader>sw", cmd = "grep_string", desc = "[S]earch [W]ords (local)" },
+		{ key = "<leader>ss", cmd = "lsp_document_symbols", desc = "[S]earch [S]ymbols (current file)" },
+		{ key = "<leader>sS", cmd = "lsp_workspace_symbols", desc = "[S]earch [S]ymbols (workspace)" },
 	}
 
 	for _, map in ipairs(mappings) do
@@ -46,7 +48,7 @@ function M.config()
 			},
 			mappings = {
 				i = {
-					["<C-c>"] = actions.close,
+					["<Esc>"] = actions.close,
 					["<C-Space>"] = require("telescope.actions.layout").toggle_preview,
 				},
 				n = {

@@ -22,6 +22,15 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
 	end,
 })
 
+-- toggle highlight only with Escape when visible
+vim.on_key(function(char)
+	if vim.fn.keytrans(char) == "<Esc>" then
+		if vim.v.hlsearch == 1 then -- Only clear if highlights are visible
+			vim.opt.hlsearch = false
+		end
+	end
+end)
+
 -- disable comment when insert next line
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	callback = function()
@@ -40,5 +49,16 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 	callback = function()
 		vim.opt_local.wrap = true
 		vim.opt_local.spell = true
+	end,
+})
+
+-- low-level languages
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "asm", "s", "S" }, -- Adjust file extensions as needed
+	callback = function()
+		-- Set tab width (number of spaces per tab)
+		vim.bo.tabstop = 4 -- Use 4 spaces for a tab
+		vim.bo.shiftwidth = 4 -- Indentation level is 4 spaces
+		vim.bo.softtabstop = 4 -- Number of spaces to insert when hitting Tab
 	end,
 })

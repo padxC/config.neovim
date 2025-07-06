@@ -1,10 +1,16 @@
--- user config
+-----------------
+-- user config --
+-----------------
 require("config.launch")
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
 require("config.terminal")
--- comment to unplug-ins
+-- comment to unplugins
+
+-----------------
+---- plugins ----
+-----------------
 
 -- mini library
 spec("plugins.mini")
@@ -15,13 +21,16 @@ spec("plugins.lualine")
 spec("plugins.dressing")
 spec("plugins.fidget")
 
--- file navigation
+-- file navigation, editing
 spec("plugins.telescope")
 spec("plugins.harpoon")
 spec("plugins.oil")
 spec("plugins.tmux")
+spec("plugins.undotree")
+spec("plugins.surround")
+spec("plugins.hardtime")
 
--- lsp
+-- lsp-server
 spec("plugins.mason")
 spec("plugins.lsp")
 
@@ -30,8 +39,8 @@ spec("plugins.completion")
 spec("plugins.tree-sitter")
 spec("plugins.formatting")
 
---obsidian note-taking
---spec("plugins.obsidian")
+-- note-taking
+spec("plugins.obsidian")
 
 --]]
-require("config.nvim-lazy")
+require("config.lazy")

@@ -7,109 +7,160 @@ local M = {
 	},
 }
 
--- setup keymap for the "BUFFER" where lsp is active
-local function lsp_keymaps(bufnr)
-	local opts = { noremap = true, silent = true }
-	local keymap = vim.api.nvim_buf_set_keymap
-	keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-	keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-	keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-	keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-	keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-	keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts) -- diagnostic for line
-end
-
-M.on_attach = function(client, bufnr)
-	lsp_keymaps(bufnr)
-
-	if client.supports_method("textDocument/inlayHint") then
-		vim.lsp.inlay_hint.enable(true, { bufnr })
-	end
-end
-
-M.toggle_inlay_hints = function()
-	local bufnr = vim.api.nvim_get_current_buf()
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr }), { bufnr })
-end
-
-function M.capabilities() -- turning on snippet support
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
-	return capabilities
-end
-
---]]
-local border = {
-	{ "╔", "FloatBorder" },
-	{ "═", "FloatBorder" },
-	{ "☘︎", "FloatBorder" },
-	{ "║", "FloatBorder" },
-	{ "╝", "FloatBorder" },
-	{ "═", "FloatBorder" },
-	{ "╚", "FloatBorder" },
-	{ "║", "FloatBorder" },
-}
-
 function M.config()
-	local lspconfig = require("lspconfig")
+	vim.api.nvim_create_autocmd("LspAttach", {
+		group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+		callback = function(ev)
+			local opts = { buffer = ev.buf, silent = true }
 
-	--  this is for change border of hover
+			-- keymaps
+			vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
+			vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+			vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
+			vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts) -- show lsp type definitions
+
+			vim.keymap.set({ "n", "v" }, "<leader>ca", function()
+				vim.lsp.buf.code_action()
+			end, opts) -- see available code actions, in visual mode will apply to selection
+
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
+			vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+		end,
+	})
+
+	local border = {
+		"╔",
+		"═",
+		"♚",
+		"║",
+		"╝",
+		"═",
+		"╚",
+		"║",
+	}
+
+	local signs = {
+		[vim.diagnostic.severity.ERROR] = " ",
+		[vim.diagnostic.severity.WARN] = " ",
+		[vim.diagnostic.severity.HINT] = "󰠠 ",
+		[vim.diagnostic.severity.INFO] = " ",
+	}
+
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border })
-	require("lspconfig.ui.windows").default_options.border = border
+	require("lspconfig.ui.windows").default_options = {
+		border = border,
+	}
 
+	-- Set the diagnostic config with all icons
 	vim.diagnostic.config({
-		virtual_text = false,
-		update_in_insert = false,
-		underline = true,
-		severity_sort = true,
+		signs = {
+			text = signs, -- Enable signs in the gutter
+		},
+		virtual_text = true, -- Specify Enable virtual text for diagnostics
+		underline = true, -- Specify Underline diagnostics
+		update_in_insert = false, -- Keep diagnostics active in insert mode
 		float = {
 			focusable = true,
 			style = "minimal",
-			border = border,
-			header = "",
+			border = "rounded",
+			header = " ☘︎ Diagnostic ☘︎ ",
 			prefix = "",
 		},
 	})
 
-	-- list server for specific setup
-	local servers = {
-		"lua_ls",
-		"cssls",
-		"html",
-		"emmet_ls",
-		"emmet_language_server",
-		"somesass_ls", -- scss
-		"tailwindcss",
-		--"eslint",
-		--"tsserver",
-		--"pyright",
-		--"bashls",
-		--"jsonls",
-		--"yamlls",
-		--"clangd",
-	}
-	-- loop through severs lsp (create lspsettings dir for each language)
-	for _, server in ipairs(servers) do
-		local opts = {
-			on_attach = M.on_attach,
-			capabilities = M.capabilities(),
-		}
-		-- extend on lspsettings directory
-		local require_ok, settings = pcall(require, "plugins.lspsettings." .. server)
-		if require_ok then
-			--use the settings of lspsettings files
-			opts = vim.tbl_deep_extend("force", settings, opts)
-		end
+	-- Setup servers
+	local lspconfig = require("lspconfig")
+	local cmp_nvim_lsp = require("cmp_nvim_lsp")
+	local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- neodev for easy work with config files
-		if server == "lua_ls" then
-			require("neodev").setup()
-		end
+	-- Config lsp servers here
+	-- lua_ls
+	lspconfig.lua_ls.setup({
+		capabilities = capabilities,
+		settings = {
+			Lua = {
+				diagnostics = {
+					globals = { "vim" },
+				},
+				completion = {
+					callSnippet = "Replace",
+				},
+				workspace = {
+					library = {
+						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+						[vim.fn.stdpath("config") .. "/lua"] = true,
+					},
+				},
+			},
+		},
+	})
+	-- emmet_ls
+	lspconfig.emmet_ls.setup({
+		capabilities = capabilities,
+		filetypes = {
+			"html",
+			"typescriptreact",
+			"javascriptreact",
+			"css",
+			"sass",
+			"scss",
+			"less",
+			"svelte",
+		},
+	})
 
-		-- add specific for each server
-		lspconfig[server].setup({ opts })
-	end
+	-- emmet_language_server
+	lspconfig.emmet_language_server.setup({
+		capabilities = capabilities,
+		filetypes = {
+			"css",
+			"html",
+			"javascript",
+			"javascriptreact",
+			"less",
+			"sass",
+			"scss",
+			"pug",
+			"typescriptreact",
+		},
+		init_options = {
+			includeLanguages = {},
+			excludeLanguages = {},
+			extensionsPath = {},
+			preferences = {},
+			showAbbreviationSuggestions = true,
+			showExpandedAbbreviation = "always",
+			showSuggestionsAsSnippets = false,
+			syntaxProfiles = {},
+			variables = {},
+		},
+	})
+
+	-- denols
+	lspconfig.denols.setup({
+		capabilities = capabilities,
+		root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+	})
+
+	-- ts_ls (replaces tsserver)
+	lspconfig.ts_ls.setup({
+		capabilities = capabilities,
+		root_dir = function(fname)
+			local util = lspconfig.util
+			return not util.root_pattern("deno.json", "deno.jsonc")(fname)
+				and util.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git")(fname)
+		end,
+		single_file_support = false,
+		init_options = {
+			preferences = {
+				includeCompletionsWithSnippetText = true,
+				includeCompletionsForImportStatements = true,
+			},
+		},
+	})
 end
 
 return M

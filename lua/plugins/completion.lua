@@ -6,11 +6,6 @@ local M = {
 		{ "hrsh7th/cmp-buffer", event = "InsertEnter" },
 		{ "hrsh7th/cmp-path", event = "InsertEnter" },
 		{ "hrsh7th/cmp-cmdline", event = "InsertEnter" },
-		{ "hrsh7th/cmp-emoji", event = "InsertEnter" },
-
-		-- vsnip user
-		-- { "hrsh7th/cmp-vsnip", event = "InsertEnter" },
-		-- { "hrsh7th/vim-vsnip", event = "InsertEnter" },
 		-----[[
 
 		{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
@@ -69,7 +64,6 @@ function M.config()
 		--]]
 		snippet = { -- for lua users
 			expand = function(args)
-				-- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
 				require("luasnip").lsp_expand(args.body)
 			end,
 		},
@@ -81,8 +75,6 @@ function M.config()
 		mapping = {
 			["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 			["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-			--['<C-d>'] = cmp.mapping.scroll_docs(-4),
-			--['<C-f>'] = cmp.mapping.scroll_docs(4),
 			["<C-Space>"] = cmp.mapping.complete(),
 			["<C-y>"] = cmp.mapping( -- yess
 				cmp.mapping.confirm({
@@ -95,12 +87,8 @@ function M.config()
 		sources = cmp.config.sources({
 			{ name = "luasnip" }, -- for luasnip users.
 			{ name = "nvim_lsp" },
-			-- { name = "vsnip" }, -- for vsnip user
 			{ name = "buffer" },
 			{ name = "path" },
-			--{ name = "emoji" },
-			--{ name = "ultisnips" }, -- For ultisnips users.
-			-- { name = 'snippy' }, -- For snippy users.
 		}),
 
 		experimental = { -- show ghost_text in completion

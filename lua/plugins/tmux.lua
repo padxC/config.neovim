@@ -5,12 +5,7 @@ local M = {
 }
 
 function M.config()
-	require("vim-tmux-navigator").setup({
-		--vim.keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>", { silent = true }),
-		--vim.keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>", { silent = true }),
-		--vim.keymap.set("n", "<C-h>", ":TmuxNavigateLeft<CR>", { silent = true }),
-		--vim.keymap.set("n", "<C-l>", ":TmuxNavigateRight<CR>", { silent = true }),
-	})
+	require("vim-tmux-navigator").setup({})
 
 	require("tmux").setup({
 		resize = {

@@ -13,7 +13,9 @@ opt.signcolumn = "yes:1"
 opt.termguicolors = true -- enable terminal colors
 opt.background = "dark"
 
-opt.fillchars = { -- aesthetic neovim
+opt.showmode = false -- hardtime
+
+opt.fillchars = { -- aesthetic appearance
 	stl = " ",
 	stlnc = " ",
 	horiz = "━", -- line when split windows
@@ -63,8 +65,8 @@ opt.inccommand = "split" -- open preview when doing substitute
 opt.errorbells = false
 opt.swapfile = false -- creates a swapfile
 opt.backup = false
-opt.undofile = true -- enable persistent undo
-opt.mouse = "a"
+opt.undofile = true -- enable persistent undo/undo-tree
+opt.mouse = "a" -- allow mouse
 opt.clipboard = "unnamedplus" -- sync clipboard
 
 -- completion
@@ -73,8 +75,8 @@ opt.shortmess:append("c")
 opt.updatetime = 100 -- faster completion (4000ms default)
 
 -- split windows
-opt.splitright = true -- split vertical window >
+opt.splitright = true
 opt.splitbelow = true
 
--- for obsidian, markdown files
+-- markdown files
 opt.conceallevel = 2

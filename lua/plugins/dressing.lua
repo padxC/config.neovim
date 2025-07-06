@@ -4,7 +4,7 @@ local M = {
 }
 
 function M.config()
-	require("dressing").setup()
+	require("dressing").setup({})
 end
 
 return M

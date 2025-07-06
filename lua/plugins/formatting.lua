@@ -8,19 +8,19 @@ function M.config()
 	require("conform").setup({
 		formatters_by_ft = {
 			lua = { "stylua" },
+			python = { "isort", "black" },
+
 			javascript = { "prettier" },
 			typescript = { "prettier" },
 			javascriptreact = { "prettier", "rustywind" },
 			typescriptreact = { "prettier", "rustywind" },
-			--svelte = { "prettier" },
+
 			css = { "prettier" },
 			html = { "prettier" },
 			json = { "prettier" },
 			yaml = { "prettier" },
-			markdown = { "prettier" },
+			--markdown = { "prettier" },
 			--graphql = { "prettier" },
-			--liquid = { "prettier" },
-			--python = { "isort", "black" },
 		},
 		format_on_save = {
 			lsp_fallback = true,
