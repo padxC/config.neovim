@@ -7,7 +7,6 @@ local M = {
 		{ "hrsh7th/cmp-path", event = "InsertEnter" },
 		{ "hrsh7th/cmp-cmdline", event = "InsertEnter" },
 		-----[[
-
 		{ "saadparwaiz1/cmp_luasnip", event = "InsertEnter" },
 		{ "onsails/lspkind.nvim", event = "InsertEnter" },
 
@@ -37,14 +36,11 @@ function M.config()
 			java = false,
 		},
 	})
-	-- configure autopairs
 
-	-- import nvim-autopairs completion functionality
+	-- configure autopairs
 	local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-	-- import nvim-cmp plugin (completions plugin)
 	local cmp = require("cmp")
-	-- make autopairs and completion work together
-	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done()) -- make autopairs and completion work together
 
 	local border = {
 		border = {

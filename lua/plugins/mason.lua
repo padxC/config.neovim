@@ -45,9 +45,9 @@ function M.config()
 			"prettier",
 			"stylua",
 
-			"isort", -- python formatter
-			"black",
-			"pylint", -- linters
+			-- "isort", -- python formatter
+			-- "black",
+			-- "pylint", -- linters
 
 			"rustywind",
 			"clangd",

@@ -14,7 +14,7 @@ function M.config()
 			local opts = { buffer = ev.buf, silent = true }
 
 			-- keymaps
-			vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
+			vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 			vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
 			vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations
@@ -25,7 +25,7 @@ function M.config()
 			end, opts) -- see available code actions, in visual mode will apply to selection
 
 			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- smart rename
-			vim.keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+			vim.keymap.set("n", "<leader>sd", "<cmd>Telescope diagnostics<CR>", opts) -- [s]how  diagnostics
 			vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
 		end,
 	})
@@ -77,8 +77,7 @@ function M.config()
 	local capabilities = cmp_nvim_lsp.default_capabilities()
 
 	-- Config lsp servers here
-	-- lua_ls
-	lspconfig.lua_ls.setup({
+	lspconfig.lua_ls.setup({ -- lua_ls
 		capabilities = capabilities,
 		settings = {
 			Lua = {
@@ -97,8 +96,8 @@ function M.config()
 			},
 		},
 	})
-	-- emmet_ls
-	lspconfig.emmet_ls.setup({
+
+	lspconfig.emmet_ls.setup({ -- emmet_ls
 		capabilities = capabilities,
 		filetypes = {
 			"html",
@@ -112,8 +111,7 @@ function M.config()
 		},
 	})
 
-	-- emmet_language_server
-	lspconfig.emmet_language_server.setup({
+	lspconfig.emmet_language_server.setup({ -- emmet_language_server
 		capabilities = capabilities,
 		filetypes = {
 			"css",
@@ -139,14 +137,12 @@ function M.config()
 		},
 	})
 
-	-- denols
-	lspconfig.denols.setup({
+	lspconfig.denols.setup({ -- denols
 		capabilities = capabilities,
 		root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 	})
 
-	-- ts_ls (replaces tsserver)
-	lspconfig.ts_ls.setup({
+	lspconfig.ts_ls.setup({ -- ts_ls (replaces tsserver)
 		capabilities = capabilities,
 		root_dir = function(fname)
 			local util = lspconfig.util

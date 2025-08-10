@@ -48,3 +48,14 @@ keymap.set("v", ">", ">gv", { desc = "Stay in visual mode during indent" })
 
 -- ctrl + backspace deletion +555% speed
 keymap.set("i", "<C-h>", "<C-w>")
+
+-- enter to :nohl
+keymap.set("n", "<CR>", function()
+	---@diagnostic disable-next-line: undefined-field
+	if vim.v.hlsearch == 1 then
+		vim.cmd.nohl()
+		return ""
+	else
+		return vim.keycode("<CR>")
+	end
+end, { expr = true })

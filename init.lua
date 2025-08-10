@@ -28,7 +28,6 @@ spec("plugins.oil")
 spec("plugins.tmux")
 spec("plugins.undotree")
 spec("plugins.surround")
-spec("plugins.hardtime")
 
 -- lsp-server
 spec("plugins.mason")

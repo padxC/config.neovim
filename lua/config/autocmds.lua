@@ -22,15 +22,6 @@ vim.api.nvim_create_autocmd({ "TermOpen" }, {
 	end,
 })
 
--- toggle highlight only with Escape when visible
-vim.on_key(function(char)
-	if vim.fn.keytrans(char) == "<Esc>" then
-		if vim.v.hlsearch == 1 then -- Only clear if highlights are visible
-			vim.opt.hlsearch = false
-		end
-	end
-end)
-
 -- disable comment when insert next line
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 	callback = function()

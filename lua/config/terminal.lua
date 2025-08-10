@@ -76,16 +76,14 @@ local function run_cmd(flags, input_file, output_file)
 	vim.fn.chansend(cp.term_chan, cmd .. "\r\n")
 end
 
--- Keybindings
 keymap.set("n", "<leader>Ts", toggle_terminal, { desc = "Toggle terminal" })
 keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- Compile and run commands
-keymap.set("n", "<leader>0", function() -- Normal run with input.txt
-	run_cmd("-O2 -Wall -Wextra -Wshadow -Wno-unused-result -Wduplicated-cond -Wconversion", "input.txt")
-end, { desc = "Compile & run (normal)" })
+keymap.set("n", "<leader>0", function()
+	run_cmd("-O2 -Wall -Wextra -Wshadow -Wno-unused-result -Wduplicated-cond", "input.txt")
+end, { desc = "Compile & run (fast)" })
 
-keymap.set("n", "<leader>9", function() -- Debug run with input.txt
+keymap.set("n", "<leader>9", function()
 	run_cmd(
 		"-O2 -Wall -Wextra -Wformat=2 -Wshadow -Wno-unused-result "
 			.. "-Wduplicated-cond -Wlogical-op -Wconversion -ggdb3 "
@@ -94,7 +92,3 @@ keymap.set("n", "<leader>9", function() -- Debug run with input.txt
 		"input.txt"
 	)
 end, { desc = "Compile & run (debug)" })
-
-keymap.set("n", "<leader>8", function() -- Run with output to file
-	run_cmd("-O2 -Wall -Wextra -Wshadow -Wno-unused-result -Wduplicated-cond -Wconversion", nil, "output.txt")
-end, { desc = "Compile & output to file" })
