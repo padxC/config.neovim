@@ -29,7 +29,7 @@ function M.config()
 	require("lspkind").init({})
 	require("nvim-autopairs").setup({
 		disable_filetype = { "TelescopePrompt", "vim" },
-		check_ts = true, -- enable treesitter
+		check_ts = true,
 		ts_config = {
 			lua = { "string" }, -- don't add pairs in lua string treesitter nodes
 			javascript = { "template_string" }, -- don't add pairs in javscript template_string treesitter nodes
@@ -96,7 +96,6 @@ function M.config()
 		},
 	})
 
-	-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 	cmp.setup.cmdline({ "/", "?" }, {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = {
@@ -104,7 +103,6 @@ function M.config()
 		},
 	})
 
-	-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 	cmp.setup.cmdline(":", {
 		mapping = cmp.mapping.preset.cmdline(),
 		sources = cmp.config.sources({

@@ -25,18 +25,17 @@ function M.config()
 
 			"cssls",
 			"html",
-			"tailwindcss",
+			-- "tailwindcss",
 			"emmet_ls",
 			"emmet_language_server",
 
 			"marksman",
-			--"pyright",
-			--"bashls",
+			-- "bashls",
 			--"clangd",
 		},
 		automatic_enable = false,
 		automatic_installation = {
-			exclude = {}, -- List of servers to exclude from auto-install
+			exclude = {},
 		},
 	})
 
@@ -44,14 +43,6 @@ function M.config()
 		ensure_installed = {
 			"prettier",
 			"stylua",
-
-			-- "isort", -- python formatter
-			-- "black",
-			-- "pylint", -- linters
-
-			"rustywind",
-			"clangd",
-			"denols",
 		},
 		auto_update = true,
 		run_on_start = true,

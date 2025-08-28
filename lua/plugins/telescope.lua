@@ -7,8 +7,6 @@ local M = { -- Ctrl-u && Ctrl-d to control preview
 }
 
 function M.config()
-	-- key mappings for Telescope
-
 	local mappings = {
 		{ key = "<leader>sb", cmd = "buffers", desc = "[S]earch [B]uffers" },
 		{ key = "<leader>sf", cmd = "find_files", desc = "[S]earch Files (directory)" },
@@ -20,6 +18,7 @@ function M.config()
 		{ key = "<leader>sS", cmd = "lsp_workspace_symbols", desc = "[S]earch [S]ymbols (workspace)" },
 	}
 
+	-- key mappings for Telescope
 	for _, map in ipairs(mappings) do
 		vim.api.nvim_set_keymap("n", map.key, "<cmd>Telescope " .. map.cmd .. "<cr>", {
 			noremap = true,

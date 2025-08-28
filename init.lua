@@ -1,12 +1,12 @@
 -----------------
 -- user config --
 -----------------
+
 require("config.launch")
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
 require("config.terminal")
--- comment to unplugins
 
 -----------------
 ---- plugins ----
@@ -39,7 +39,7 @@ spec("plugins.tree-sitter")
 spec("plugins.formatting")
 
 -- note-taking
-spec("plugins.obsidian")
+--spec("plugins.obsidian")
 
 --]]
 require("config.lazy")

@@ -11,16 +11,10 @@ function M.config()
 			python = { "isort", "black" },
 
 			javascript = { "prettier" },
-			typescript = { "prettier" },
-			javascriptreact = { "prettier", "rustywind" },
-			typescriptreact = { "prettier", "rustywind" },
+			javascriptreact = { "prettier" },
+			typescriptreact = { "prettier" },
 
-			css = { "prettier" },
-			html = { "prettier" },
 			json = { "prettier" },
-			yaml = { "prettier" },
-			--markdown = { "prettier" },
-			--graphql = { "prettier" },
 		},
 		format_on_save = {
 			lsp_fallback = true,

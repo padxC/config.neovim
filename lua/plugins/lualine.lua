@@ -10,7 +10,6 @@ local M = {
 function M.config()
 	local lualine = require("lualine")
 
-	-- setting up lualine
 	lualine.setup({
 		options = {
 			icons_enabled = true,
@@ -48,7 +47,6 @@ function M.config()
 			lualine_c = {
 				{
 					function()
-						--return ""
 						return "%="
 					end,
 				},
