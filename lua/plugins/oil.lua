@@ -14,8 +14,6 @@ function M.config()
 			["<C-c>"] = false,
 			["<C-h>"] = false,
 			["<C-Space>"] = "actions.preview",
-			["g?"] = "actions.show_help",
-			["g."] = "actions.toggle_hidden",
 		},
 		view_options = {
 			show_hidden = true,
@@ -25,9 +23,6 @@ function M.config()
 			max_width = 130,
 		},
 	})
-
-	-- Open parent directory in current window
-	--vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 	-- Open parent directory in floating window
 	vim.keymap.set("n", "<space>e", require("oil").toggle_float)

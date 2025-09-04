@@ -1,8 +1,9 @@
 -----------------
 -- user config --
 -----------------
+require("core.lsp")
+require("core.launch")
 
-require("config.launch")
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
@@ -18,7 +19,7 @@ spec("plugins.mini")
 -- GUIs
 spec("plugins.colorscheme")
 spec("plugins.lualine")
-spec("plugins.dressing")
+-- spec("plugins.dressing")
 spec("plugins.fidget")
 
 -- file navigation, editing
@@ -27,19 +28,14 @@ spec("plugins.harpoon")
 spec("plugins.oil")
 spec("plugins.tmux")
 spec("plugins.undotree")
-spec("plugins.surround")
-
--- lsp-server
-spec("plugins.mason")
-spec("plugins.lsp")
 
 -- syntax, formatting, completion
-spec("plugins.completion")
+spec("plugins.blink")
 spec("plugins.tree-sitter")
-spec("plugins.formatting")
+spec("plugins.conform")
 
 -- note-taking
 --spec("plugins.obsidian")
-
 --]]
-require("config.lazy")
+
+require("core.lazy")
