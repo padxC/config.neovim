@@ -28,25 +28,25 @@ function M.config()
       enabled = true,
       keymap = { preset = 'cmdline' },
       sources = { 'buffer', 'cmdline' },
-      completion = { menu = { auto_show = true } },
+      completion = {
+        menu = { auto_show = true },
+      },
     },
     completion = {
       menu = {
-        scrollbar = false,
         scrolloff = 2,
+        scrollbar = false,
+        winhighlight = "CursorLine:BlinkCmpMenuSelection",
         draw = {
           treesitter = { "lsp" },
-          columns = {
-            { "label", "label_description", "kind", gap = 2 },
-          },
+          columns = { { "label", "label_description", "kind", gap = 2 }, },
         },
-        winhighlight = "CursorLine:BlinkCmpMenuSelection",
       },
       documentation = {
         window = {
           scrollbar = false,
+          winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc",
         },
-        winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc",
         auto_show = true,
         auto_show_delay_ms = 300,
       },

@@ -7,7 +7,6 @@ require("core.launch")
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
-require("config.terminal")
 
 -----------------
 ---- plugins ----
@@ -19,7 +18,6 @@ spec("plugins.mini")
 -- GUIs
 spec("plugins.colorscheme")
 spec("plugins.lualine")
--- spec("plugins.dressing")
 spec("plugins.fidget")
 
 -- file navigation, editing
@@ -33,9 +31,6 @@ spec("plugins.undotree")
 spec("plugins.blink")
 spec("plugins.tree-sitter")
 spec("plugins.conform")
-
--- note-taking
---spec("plugins.obsidian")
 --]]
 
 require("core.lazy")

@@ -37,6 +37,9 @@ keymap.set("v", ">", ">gv", { desc = "Stay in visual mode during indent" })
 -- ctrl + backspace deletion
 keymap.set("i", "<C-h>", "<C-w>")
 
+-- competitive programming
+keymap.set("n", "<F10>", ":!g++ -O2 -Wall -Wextra -Wshadow -Wno-unused-result -Wduplicated-cond -std=c++17 -o program % && ./program < input.txt > output.txt && cat output.txt<CR>", { buffer = true, desc = "..." })
+
 -- enter to :nohl
 keymap.set("n", "<CR>", function()
 	---@diagnostic disable-next-line: undefined-field
@@ -47,3 +50,4 @@ keymap.set("n", "<CR>", function()
 		return vim.keycode("<CR>")
 	end
 end, { expr = true })
+
