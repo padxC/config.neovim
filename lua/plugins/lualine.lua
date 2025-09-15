@@ -15,7 +15,6 @@ function M.config()
 			icons_enabled = true,
 			--check more them https://github.com/nvim-lualine/lualine.nvim/blob/master/THEMES.md
 			theme = "gruvbox_dark",
-			--"horizon",
 
 			component_separators = { left = "", right = "" },
 			section_separators = { left = "", right = "" },

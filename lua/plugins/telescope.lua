@@ -28,7 +28,6 @@ function M.config()
 	end
 
 	local actions = require("telescope.actions")
-
 	require("telescope").setup({
 		defaults = {
 			selection_strategy = "reset",

@@ -17,7 +17,7 @@ function M.config()
       nerd_font_variant = 'normal',
     },
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "snippets", "buffer", "cmdline" },
       providers = {
         cmdline = {
           min_keyword_length = 2,
@@ -25,12 +25,8 @@ function M.config()
       },
     },
     cmdline = {
-      enabled = true,
-      keymap = { preset = 'cmdline' },
-      sources = { 'buffer', 'cmdline' },
-      completion = {
-        menu = { auto_show = true },
-      },
+      keymap = { preset = 'inherit' },
+      completion = { menu = { auto_show = true } },
     },
     completion = {
       menu = {
@@ -48,11 +44,11 @@ function M.config()
           winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc",
         },
         auto_show = true,
-        auto_show_delay_ms = 300,
+        auto_show_delay_ms = 200,
       },
     },
   })
-
+  
   require("luasnip.loaders.from_vscode").lazy_load()
 
 end
