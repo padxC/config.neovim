@@ -24,9 +24,5 @@ vim.diagnostic.config({
   },
 })
 
--- completion
-opt.completeopt = "menu,menuone,noselect"
-opt.shortmess:append("c")
-opt.updatetime = 200 -- faster completion (4000ms default)
 
 
