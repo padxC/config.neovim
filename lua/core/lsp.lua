@@ -21,9 +21,12 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.INFO] = "󰋽 ",
       [vim.diagnostic.severity.HINT] = "󰌶 ",
     },
-    numhl = {
-      [vim.diagnostic.severity.ERROR] = "ErrorMsg",
-      [vim.diagnostic.severity.WARN] = "WarningMsg",
-    },
   },
 })
+
+-- completion
+opt.completeopt = "menu,menuone,noselect"
+opt.shortmess:append("c")
+opt.updatetime = 200 -- faster completion (4000ms default)
+
+

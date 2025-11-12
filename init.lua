@@ -18,19 +18,15 @@ spec("plugins.mini")
 -- GUIs
 spec("plugins.colorscheme")
 spec("plugins.lualine")
-spec("plugins.fidget")
 
 -- file navigation, editing
 spec("plugins.telescope")
-spec("plugins.harpoon")
-spec("plugins.oil")
-spec("plugins.tmux")
 spec("plugins.undotree")
+spec("plugins.tmux")
+spec("plugins.oil")
 
 -- syntax, formatting, completion
-spec("plugins.blink")
 spec("plugins.tree-sitter")
-spec("plugins.conform")
 --]]
 
 require("core.lazy")

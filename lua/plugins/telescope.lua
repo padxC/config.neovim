@@ -1,36 +1,21 @@
 local M = { -- Ctrl-u && Ctrl-d to control preview
 	"nvim-telescope/telescope.nvim",
-	dependencies = {
-		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-		{ "nvim-lua/plenary.nvim" },
-	},
+  tag = '0.1.8',
+	dependencies = { "nvim-lua/plenary.nvim" },
 }
 
 function M.config()
-	local mappings = {
-		{ key = "<leader>sb", cmd = "buffers", desc = "[S]earch [B]uffers" },
-		{ key = "<leader>sf", cmd = "find_files", desc = "[S]earch Files (directory)" },
-		{ key = "<leader>sr", cmd = "oldfiles", desc = "[S]earch [R]ecent Files" },
-		{ key = "<leader>sh", cmd = "help_tags", desc = "[S]earch [H]elps" },
-		{ key = "<leader>sW", cmd = "live_grep", desc = "[S]earch Words (workspace)" },
-		{ key = "<leader>sw", cmd = "grep_string", desc = "[S]earch [W]ords (local)" },
-		{ key = "<leader>ss", cmd = "lsp_document_symbols", desc = "[S]earch [S]ymbols (current file)" },
-		{ key = "<leader>sS", cmd = "lsp_workspace_symbols", desc = "[S]earch [S]ymbols (workspace)" },
-	}
-
-	-- key mappings for Telescope
-	for _, map in ipairs(mappings) do
-		vim.api.nvim_set_keymap("n", map.key, "<cmd>Telescope " .. map.cmd .. "<cr>", {
-			noremap = true,
-			silent = true,
-			desc = map.desc,
-		})
-	end
+  local builtin = require('telescope.builtin')
+  local keymap = vim.keymap
+  keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Telescope find files' })
+  keymap.set('n', '<leader>sr', builtin.oldfiles, { desc = 'Telescope search word' })
+  keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Telescope buffers' })
+  keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'Telescope live grep' })
+  keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 	local actions = require("telescope.actions")
 	require("telescope").setup({
 		defaults = {
-			selection_strategy = "reset",
 			path_display = { "smart" },
 			color_devicons = true,
 			vimgrep_arguments = {
@@ -51,26 +36,16 @@ function M.config()
 				},
 				n = {
 					["<Esc>"] = actions.close,
-					["<C-p>"] = actions.move_selection_previous,
-					["<C-n>"] = actions.move_selection_next,
 				},
 			},
 		},
 		pickers = {
 			find_files = {
-				previewer = false,
+        previewer = false,
+        hidden = true,
 			},
 			buffers = {
 				previewer = false,
-				initial_mode = "normal",
-			},
-		},
-		extensions = {
-			fzf = {
-				fuzzy = true, -- false will only do exact matching
-				override_generic_sorter = true, -- override the generic sorter
-				override_file_sorter = true, -- override the file sorter
-				case_mode = "smart_case", -- or "ignore_case" or "respect_case"
 			},
 		},
 	})
